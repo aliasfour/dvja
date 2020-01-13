@@ -18,12 +18,12 @@ pipeline {
         dependencyCheckPublisher failedTotalCritical: 100, failedTotalHigh: 150, failedTotalLow: 100, failedTotalMedium: 500, pattern: '', unstableTotalCritical: 100, unstableTotalHigh: 100, unstableTotalLow: 100, unstableTotalMedium: 500
         }
     }
-    stage('Scan for vulnerabilities') {
-      steps {
-          sh 'java -jar target/dvja-*.war && zap-cli quick-scan --self-contained --spider -r http://127.0.0.1 && zap-cli report -o zap-report.html -f html'
-          archiveArtifacts artifacts: 'zap-report.html', fingerprint: true
-      }
-    }
+    // stage('Scan for vulnerabilities') {
+    //   steps {
+    //       sh 'java -jar target/dvja-*.war && zap-cli quick-scan --self-contained --spider -r http://127.0.0.1 && zap-cli report -o zap-report.html -f html'
+    //       archiveArtifacts artifacts: 'zap-report.html', fingerprint: true
+    //   }
+    // }
 
     stage('Publish to S3') {
       steps {
